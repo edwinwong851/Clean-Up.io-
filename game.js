@@ -6,6 +6,38 @@ canvas.height = window.innerHeight;
 
 let score = 0;
 const scoreDisplay = document.getElementById("score");
+const rebirthDisplay = document.getElementById("rebirths");
+
+// ---------------------- REBIRTH SYSTEM ----------------------
+let rebirths = 0;
+const baseHoleRadius = 80;
+const rebirthThreshold = 220;
+
+function updateRebirthUI() {
+    if (rebirthDisplay) {
+        rebirthDisplay.textContent = "Rebirths: " + rebirths;
+    }
+}
+
+function rebirth() {
+    rebirths += 1;
+    score = 0;
+    scoreMultiplier = 1;
+    scoreMultiplierLevel = 0;
+    autoCollector = false;
+    autoCollectorLevel = 0;
+    blackHole.radius = baseHoleRadius;
+    shapes = [];
+    updateRebirthUI();
+    scoreDisplay.textContent = "Score: " + score;
+    announce("REBIRTH! " + rebirths + " total");
+}
+
+function maybeRebirth() {
+    if (blackHole.radius >= rebirthThreshold) {
+        rebirth();
+    }
+}
 
 // ---------------------- UPGRADE VARIABLES ----------------------
 let scoreMultiplier = 1;
@@ -188,6 +220,8 @@ function update() {
         }
         return true;
     });
+
+    maybeRebirth();
 }
 
 // ---------------------- DRAW ----------------------
@@ -270,3 +304,5 @@ function announce(text) {
     setTimeout(() => div.style.opacity = "0", 100);
     setTimeout(() => div.remove(), 1100);
 }
+
+updateRebirthUI();
