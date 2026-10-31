@@ -30,8 +30,8 @@ let draggingShape = null;
 const SHAPE_TYPES = [
     { type: "square", points: 1, chance: 0.50 },
     { type: "circle", points: 2, chance: 0.30 },
-    { type: "triangle", points: 4, chance: 0.15 },
-    { type: "diamond", points: 10, chance: 0.05 }
+    { type: "triangle", points: 10, chance: 0.19 },
+    { type: "diamond", points: 20, chance: 0.01 }
 ];
 
 function rollShapeType() {
@@ -47,8 +47,8 @@ function rollShapeType() {
 
 // ---------------------- MUTATIONS ----------------------
 const MUTATIONS = [
-    { name: "none", chance: 0.85, bonus: 0, colorEffect: null },
-    { name: "spark", chance: 0.10, bonus: 1, colorEffect: "white" },
+    { name: "none", chance: 0.70, bonus: 0, colorEffect: null },
+    { name: "spark", chance: 0.25, bonus: 1, colorEffect: "white" },
     { name: "flare", chance: 0.04, bonus: 3, colorEffect: "yellow" },
     { name: "nova", chance: 0.01, bonus: 10, colorEffect: "cyan" },
     { name: "supernova", chance: 0.002, bonus: 25, colorEffect: "magenta" }
@@ -86,8 +86,8 @@ function spawnShape() {
     }
 }
 
-// ⭐ Slower spawn interval (4 seconds)
-setInterval(spawnShape, 4000);
+// ⭐ Slower spawn interval (3 seconds)
+setInterval(spawnShape, 3000);
 
 // ---------------------- DRAW SHAPES ----------------------
 function drawShape(s) {
